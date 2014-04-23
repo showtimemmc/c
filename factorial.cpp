@@ -13,7 +13,7 @@
  	if (factor<0)
  	{
  		printf("factor should be great than zero\n");
- 		return -1;
+ 		return 0;
  	}
 
  	if (factor==0)
@@ -39,7 +39,7 @@ int Factorial_Recursion(int factor)
 	if (factor<0)
 	{
 		printf("factor shuould be great than zero\n");
-		return -1;
+		return 0;
 	}
 	if (factor==0)
 	{
@@ -58,7 +58,7 @@ int Factorial_Tail(int factor,unsigned long facorial)
 	if (factor<0)
 	{
 		printf("factor shuould be great than zero\n");
-		return -1;
+		return 0;
 	}
 	if (factor==0)
 	{
@@ -78,14 +78,20 @@ TODO:增加函数执行时间计算
 
  	unsigned int start,stop;
  	
- 	//start=time(0);
+ 	start=clock();
  	std::cout<<"Loop result:"<<Factorial_Loop(factor)<<std::endl;
- 	//stop=time(0);
- 	//std::cout<<"Time:"<<start<<std::endl<<std::endl;
- 	//std::cout<<"Time:"<<stop<<std::endl<<std::endl;
+ 	stop=clock();
+ 	std::cout<<"Time:"<<stop-start<<std::endl<<std::endl;
 
+ 	start=clock();
  	std::cout<<"Recursion result:"<<Factorial_Recursion(factor)<<std::endl;
+ 	stop=clock();
+ 	std::cout<<"Time:"<<stop-start<<std::endl<<std::endl;
+
+ 	start=clock();
  	std::cout<<"Tail result:"<<Factorial_Tail(factor,1)<<std::endl;
+ 	stop=clock();
+ 	std::cout<<"Time:"<<stop-start<<std::endl<<std::endl;
 
  	return 0;
  }
