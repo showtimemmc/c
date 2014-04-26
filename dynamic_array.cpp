@@ -52,7 +52,7 @@ bool AddObject(MutableArray* pma,int int_obj)
 		pma->size=pma->size*2;
 	}
 	//ma->array=realloc(ma->array,ma->size);  the address of ma->array would be lost,if the realloc failed.
-	if (!realloc(pma->array,pma->size))
+	if (!(int*)realloc(pma->array,pma->size))
 	{
 		printf("ERROR,mem assign failed\n");
 		return false;
