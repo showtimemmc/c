@@ -33,10 +33,14 @@ bool InitMutableArray(MutableArray* pma,size_t init_size)
  */
 void FreeMutableArray(MutableArray* pma)
 {
-	free(pma->array);
-	pma->array=NULL;
-	pma->used=0;
-	pma->size=0;
+	//if pma is not null, free it.
+	if (pma)
+	{
+		free(pma->array);
+		pma->array=NULL;
+		pma->used=0;
+		pma->size=0;
+	}
 }
 /**
  * 在数组末尾添加对象
@@ -97,7 +101,7 @@ int main(int argc, char const *argv[])
 	}
 	for (size_t i = 0; i < ma.size; ++i)
 	{
-		ma.array[i]=3;
+		ma.array[i]=i;
 		ma.used++;
 	}
 	for (size_t i = 0; i < ma.size; ++i)
@@ -112,10 +116,10 @@ int main(int argc, char const *argv[])
 	std::cin>>index;
 	std::cout<<"get:"<<GetObject(&ma,index)<<std::endl;
 
-	std::cout<<ma.array<<std::endl;
+	//std::cout<<ma.array<<std::endl;
 
 	FreeMutableArray(&ma);
-	std::cout<<ma.array<<std::endl;
+	//std::cout<<ma.array<<std::endl;
 	return 0;
 }
 
