@@ -70,7 +70,7 @@ bool AddObject(MutableArray* pma,int int_obj)
  * @param  index [description]
  * @return       [description]
  */
-int GetObject(MutableArray* pma,size_t index)
+int GetObject(const MutableArray* pma,const size_t index)
 {
 	if (index >= pma->used)//负数参数传入时，由于传递参数副本时进行了类型转换，负数被转换为很大的正数，所以不需要判断index小于0的状况
 	{
@@ -82,6 +82,27 @@ int GetObject(MutableArray* pma,size_t index)
 	{
 		return pma->array[index];
 	}
+}
+int GetLastObject(const MutableArray* p_ma)
+{
+	if (p_ma->used == 0)
+	{
+		printf("The array is empty\n");
+	}
+	return p_ma->array[p_ma->used-1];
+}
+/**
+ * [RemoveLastObject description]
+ * @param p_ma [description]
+ */
+void RemoveLastObject(MutableArray* p_ma)
+{
+	if (p_ma->used == 0)
+	{
+		printf("The array is empty\n");
+		return;
+	}
+	p_ma->used--;
 }
 //TODO: remove function
 //TODO: support multi type with template
@@ -109,13 +130,16 @@ int main(int argc, char const *argv[])
 		printf("%d\n", ma.array[i]);
 	}
 	std::cout<<"used:"<<ma.used<<std::endl;
-	AddObject(&ma,8);
+	AddObject(&ma,5);
 	std::cout<<"used:"<<ma.used<<std::endl;
 
 	int index;
 	std::cin>>index;
 	std::cout<<"get:"<<GetObject(&ma,index)<<std::endl;
 
+	std::cout<<"Last:"<<GetLastObject(&ma)<<std::endl;
+	RemoveLastObject(&ma);
+	std::cout<<"After remove last:"<<GetLastObject(&ma)<<std::endl;
 	//std::cout<<ma.array<<std::endl;
 
 	FreeMutableArray(&ma);
