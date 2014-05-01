@@ -65,6 +65,34 @@ bool AddObject(MutableArray* pma,int int_obj)
 	return true;
 }
 /**
+ * 在指定位置处插入元素
+ * @param  p_ma  [description]
+ * @param  index index start with 0
+ * @param  obj   obj to be inserted 
+ * @return       true | false 
+ */
+bool InsertObject(MutableArray* p_ma,unsigned int index,int obj)
+{
+	//XXX:size会指数上涨
+	if (p_ma->used == p_ma->size)		
+	{
+		p_ma->size*=2;
+	}
+	if (index > p_ma->used)
+	{
+		printf("ERROR,index beyond buffer\n");
+		return false;	
+	}
+	for (int i = p_ma->used; i >= index; --i)
+	{
+		p_ma->array[i+1]=p_ma->array[i];
+	}
+	p_ma->array[index]=obj;
+	p_ma->used++;
+
+	return true;
+}
+/**
  * get object at index in array
  * @param  pma    [description]
  * @param  index [description]
@@ -83,6 +111,11 @@ int GetObject(const MutableArray* pma,const size_t index)
 		return pma->array[index];
 	}
 }
+/**
+ * 获取数组最后添加元素
+ * @param  p_ma [description]
+ * @return      数组最后一个元素
+ */
 int GetLastObject(const MutableArray* p_ma)
 {
 	if (p_ma->used == 0)
@@ -104,7 +137,19 @@ void RemoveLastObject(MutableArray* p_ma)
 	}
 	p_ma->used--;
 }
-//TODO: remove function
+/**
+ * 打印输出数组中的内容
+ * @param p_ma [description]
+ */
+void PrintMutableArray(const MutableArray* p_ma)
+{
+	for (int i = 0; i < p_ma->used; ++i)
+	{
+		printf("%d ", p_ma->array[i]);
+	}
+	printf("\n");
+	return;
+}
 //TODO: support multi type with template
 //TODO: class
 int main(int argc, char const *argv[])
@@ -125,19 +170,18 @@ int main(int argc, char const *argv[])
 		ma.array[i]=i;
 		ma.used++;
 	}
-	for (size_t i = 0; i < ma.size; ++i)
-	{
-		printf("%d\n", ma.array[i]);
-	}
-	std::cout<<"used:"<<ma.used<<std::endl;
+
+	PrintMutableArray(&ma);
 	AddObject(&ma,5);
-	std::cout<<"used:"<<ma.used<<std::endl;
+	PrintMutableArray(&ma);
 
 	int index;
 	std::cin>>index;
-	std::cout<<"get:"<<GetObject(&ma,index)<<std::endl;
+	//std::cout<<"get:"<<GetObject(&ma,index)<<std::endl;
+	//std::cout<<"Last:"<<GetLastObject(&ma)<<std::endl;
 
-	std::cout<<"Last:"<<GetLastObject(&ma)<<std::endl;
+	InsertObject(&ma,index,11);
+	PrintMutableArray(&ma);
 	RemoveLastObject(&ma);
 	std::cout<<"After remove last:"<<GetLastObject(&ma)<<std::endl;
 	//std::cout<<ma.array<<std::endl;
