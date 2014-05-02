@@ -11,6 +11,7 @@ struct MutableArray
  * @param  init_size  
  * @return      True|False    return true if it is initialized success
  */
+//XXX:maybe there is a problem
 bool InitMutableArray(MutableArray* pma,size_t init_size)
 {
 	pma->array=(int*)malloc(init_size*sizeof(int));
@@ -177,8 +178,8 @@ int main(int argc, char const *argv[])
 
 	int index;
 	std::cin>>index;
-	//std::cout<<"get:"<<GetObject(&ma,index)<<std::endl;
-	//std::cout<<"Last:"<<GetLastObject(&ma)<<std::endl;
+	std::cout<<"get:"<<GetObject(&ma,index)<<std::endl;
+	std::cout<<"Last:"<<GetLastObject(&ma)<<std::endl;
 
 	InsertObject(&ma,index,11);
 	PrintMutableArray(&ma);
