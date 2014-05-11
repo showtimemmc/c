@@ -103,5 +103,6 @@ int main(int argc, char const *argv[])
 
 	//test_mem_overlap(mystrcpy1,src);
 	test_array(mystrcpy1,src);
+	test_mem_overlap(mystrcpy1,src);
 	return 0;
 }
