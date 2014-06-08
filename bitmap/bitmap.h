@@ -1,12 +1,15 @@
-#include "bitmap.h"
+
+#include <iostream>
+
 class bitmap
 {
-private:
-	int mask=0x07;
-	int* a;
 
+private:
+	int* _a;
+	unsigned long _size;//size of int array
 
 public:
+	static const int _mask;//
 	bitmap(unsigned long);
 	~bitmap();
 	
@@ -14,3 +17,4 @@ public:
 	void set(unsigned long);
 	bool contain(unsigned long);
 };
+

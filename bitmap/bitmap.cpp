@@ -1,29 +1,28 @@
 #include "bitmap.h"
-#include "iostream"
-class bitmap
-{
-public:
-	bitmap(unsigned long N)
+const int bitmap::_mask=0x1f;
+
+	//max is the max value of the data
+	bitmap::bitmap(unsigned long max)
 	{
+		_size=max/32+1;
 		//new 分配失败会抛异常，不需要检查返回是否为null
-		a = new int[N/32+1];
+		_a = new int[_size];
+		memset(_a,0,sizeof(int)*_size);
 	}
-	~bitmap();
-	void set(unsigned long input)
+	void bitmap::set(unsigned long input)
 	{
-		a[input>>5] |= 1<<(input&mask) ;
+		_a[input>>5] |= 1<<(input&bitmap::_mask) ;
 	}
-	void clear(unsigned long input)
+	void bitmap::clear(unsigned long input)
 	{
-		a[input>>5] &= 1<<(input&mask);
+		_a[input>>5] &= 1<<(input&bitmap::_mask);
 	}
-	bool contain(unsigned long input)
+	bool bitmap::contain(unsigned long input)
 	{
-		if (a[input>>5]&(1<<(input&mask))
+		if (_a[input>>5]&(1<<(input&bitmap::_mask)))
 		{
 			return true;
 		}
 		return false;
 	}
 	
-};
