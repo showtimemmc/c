@@ -4,7 +4,7 @@
 #include <iostream>
 int main(int argc, char const *argv[])
 {
-	int a[]={3,2,2,1,3,1,5,6,5,5,5};
+	int a[]={3,2,2,1,3,1,5,6,6,5,5};
 	
 	for (int i = 1; i < 11; ++i)
 	{
