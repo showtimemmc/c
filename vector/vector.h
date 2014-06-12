@@ -5,12 +5,14 @@
 class vector
 {
 private:
+	unsigned int capacity;
+	unsigned int size;
 
 
 public:
 	vector();
 	~vector();
-
+	push_back();
 
 };
 
