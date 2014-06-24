@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 struct MutableArray
 {
 	int* array;
@@ -27,6 +28,27 @@ bool InitMutableArray(MutableArray* pma,size_t init_size)
 	//std::cout<<"after init&: "<<&ma->array<<std::endl;//same with struct address
 
 	return true; 
+}
+/**
+ * resize 扩大数组容量
+ * @param  pma 需要扩容的数组指针
+ * @return     扩容后的数组指针
+ */
+MutableArray* resize(MutableArray* pma)
+{
+	if (pma == NULL)
+	{
+		printf("param is null\n");
+		return NULL;
+	}
+	MutableArray* pnew=(int*)realloc(pma,pma->size*2);
+	if (pnew==NULL)
+	{
+		printf("realloc failed\n");
+		return NULL;
+	}
+	return pnew;
+
 }
 /**
  * [FreeMutableArray description]
@@ -177,11 +199,15 @@ int main(int argc, char const *argv[])
 	PrintMutableArray(&ma);
 
 	int index;
+	std::cout<<"please input the index of array: ";
 	std::cin>>index;
 	std::cout<<"get:"<<GetObject(&ma,index)<<std::endl;
 	std::cout<<"Last:"<<GetLastObject(&ma)<<std::endl;
 
-	InsertObject(&ma,index,11);
+	int value;
+	std::cout<<"please input the value you want to add: ";
+	std::cin>>value;	
+	InsertObject(&ma,index,value);
 	PrintMutableArray(&ma);
 	RemoveLastObject(&ma);
 	std::cout<<"After remove last:"<<GetLastObject(&ma)<<std::endl;
